@@ -1,0 +1,132 @@
+{% extends "booking/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero-section" 
+style="background-image: url('{% static "images/abc.jpg" %}');
+       background-size: cover;
+       background-position: center;
+       padding: 120px 0;
+       height: 700px;
+       color: white;">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold">MaxFit Premium Turf Kallar</h1>
+    <p class="lead">Book your favorite slot instantly with our easy online booking system.</p>
+    <a href="{% url 'booking:book' %}" class="btn btn-success btn-lg px-4 mt-3">Book Now</a>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="{% static 'images/turf.jpg' %}" class="img-fluid rounded shadow" alt="Turf image">
+      </div>
+      <div style="margin-top:20px;" class="col-md-6">
+        <h2 class="fw-bold">About MaxFit Turf</h2>
+        <p class="text-muted">
+          MaxFit Turf is a high-quality artificial grass ground designed for Football, Cricket, and Fitness training.
+          Our turf is equipped with premium lighting, safe synthetic grass, and perfect maintenance.
+        </p>
+        <ul>
+          <li>Open Hours: 6:00 AM – 12:00 AM</li>
+          <li>Location: Kallar , Kasaragod</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">Why Choose Us?</h2>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="p-4 shadow rounded bg-white h-100">
+          <h5 class="fw-bold">Premium Artificial Grass</h5>
+          <p class="text-muted">Experience world-class turf designed for professional play.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 shadow rounded bg-white h-100">
+          <h5 class="fw-bold">LED Flood Lights</h5>
+          <p class="text-muted">Play anytime with bright, safe lighting conditions.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 shadow rounded bg-white h-100">
+          <h5 class="fw-bold">Parking & Amenities</h5>
+          <p class="text-muted">Ample parking, drinking water, and clean washrooms.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold">Pricing</h2>
+    <p class="lead">Affordable hourly rates with top-quality turf services.</p>
+    
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="p-4 bg-success text-white rounded shadow-lg">
+          <h3>₹800 / hour</h3>
+          <p class="mb-3">6:00 AM to 6:00 PM</p>
+          <a href="{% url 'booking:book' %}" class="btn btn-light w-100">Book Slot</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container text-center">
+    
+    
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="p-4 bg-success text-white rounded shadow-lg">
+          <h3>₹1200 / hour</h3>
+          <p class="mb-3">6:00 PM to 12:00 AM</p>
+          <a href="{% url 'booking:book' %}" class="btn btn-light w-100">Book Slot</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">Gallery</h2>
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <img src="{% static 'images/turf.jpg' %}" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-md-4">
+        <img src="{% static 'images/turf.jpg' %}" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-md-4">
+        <img src="{% static 'images/turf.jpg' %}" class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="py-5 text-center text-white" style="background:#0d6efd;">
+  <h2 class="fw-bold">Ready to Play?</h2>
+  <p class="lead">Choose your time slot and enjoy the MaxFit Turf experience.</p>
+  <a href="{% url 'booking:book' %}" class="btn btn-light btn-lg px-4">Book Now</a>
+</section>
+
+{% endblock %}

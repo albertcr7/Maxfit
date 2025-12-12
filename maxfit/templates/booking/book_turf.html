@@ -1,0 +1,143 @@
+{% extends "booking/base.html" %}
+{% load static custom_filters %}
+{% block content %}
+
+<style>
+
+/* DATE BUTTON STYLE */
+.date-btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: 0.2s;
+    color: black !important;
+}
+.date-btn.active {
+    background: #e63946 !important;
+    color: white !important;
+}
+.date-btn.active * {
+    color: white !important;
+}
+
+/* Remove underline from links */
+.col-auto > a,
+.col-auto > a *,
+.date-btn a,
+.date-btn a * {
+    text-decoration: none !important;
+}
+
+/* Hover for non-active dates */
+.date-btn:not(.active):hover {
+    background: #f3f3f3;
+    color: black !important;
+}
+
+/* SLOT BUTTONS */
+.slot-btn {
+    padding: 10px 20px;
+    border: 2px solid #28a745;
+    border-radius: 6px;
+    margin: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.2s;
+    color: #28a745;
+}
+.slot-btn:hover {
+    background: #e8ffe8;
+}
+.slot-btn.selected {
+    background: #28a745 !important;
+    color: white !important;
+}
+
+/* BOOKED or PAST SLOT */
+.slot-btn.booked {
+    border-color: #bbb !important;
+    background: #f3f3f3 !important;
+    color: #bbb !important;
+    cursor: not-allowed !important;
+}
+</style>
+
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <h2 class="fw-bold mb-3">Book Your Slot</h2>
+
+    <!-- DATE SELECTOR -->
+    <div class="row g-2 mb-4">
+
+        {% for i in 0|to:7 %}
+        {% with d=today|add_days:i %}
+        <div class="col-auto">
+            <a href="?date={{ d|date:'Y-m-d' }}">
+                <div class="date-btn {% if selected_date == d|date:'Y-m-d' %}active{% endif %}">
+                    <div class="fw-bold">{{ d|date:'D' }}</div>
+                    <div>{{ d|date:'d M' }}</div>
+                </div>
+            </a>
+        </div>
+        {% endwith %}
+        {% endfor %}
+
+    </div>
+
+    <!-- SLOT SELECTION BOX -->
+    <div class="p-4 rounded shadow-sm bg-white">
+
+        <h4 class="mb-3">Available Slots</h4>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% for slot in time_slots %}
+    {% with slot_start=slot.start_time slot_end=slot.end_time %}
+
+        {% if slot.id in booked_slot_ids %}
+            <!-- SLOT ALREADY BOOKED -->
+            <span class="slot-btn booked">{{ slot }}</span>
+
+        {% elif selected_date == today|date:"Y-m-d" and slot_end <= now %}
+            <!-- PAST TIME SLOT FOR TODAY -->
+            <span class="slot-btn booked">{{ slot }}</span>
+
+        {% else %}
+            <!-- AVAILABLE FUTURE SLOT -->
+            <label>
+                <input type="radio" name="timeslot" value="{{ slot.id }}" hidden class="slot-radio">
+                <span class="slot-btn">{{ slot }}</span>
+            </label>
+        {% endif %}
+
+    {% endwith %}
+{% endfor %}
+
+
+            <input type="hidden" name="date" value="{{ selected_date }}">
+
+            <button class="btn btn-success w-100 mt-3">Confirm Booking</button>
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- SLOT SELECTION SCRIPT -->
+<script>
+document.querySelectorAll(".slot-radio").forEach((radio) => {
+    radio.addEventListener("change", function(){
+        document.querySelectorAll(".slot-btn").forEach(b => b.classList.remove("selected"));
+        this.nextElementSibling.classList.add("selected");
+    });
+});
+</script>
+
+{% endblock %}
