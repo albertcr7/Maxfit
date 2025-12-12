@@ -61,6 +61,13 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'maxfit-26jj.onrender.com',  # Your Render domain
+]
+
+
 # Password
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
