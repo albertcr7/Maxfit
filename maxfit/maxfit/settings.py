@@ -64,8 +64,9 @@ DATABASES = {
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'maxfit-26jj.onrender.com',  # Your Render domain
+    'maxfit-26jj.onrender.com',
 ]
+
 
 
 # Password
